@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <menuitem id="funding_source_config_menuitem"
+              parent="project.menu_project_config"
+              name="Funding Source" />
+    <menuitem id="funding_source_menuitem"
+              parent="funding_source_config_menuitem"
+              action="partner_funding_source.funding_source_action" />
+    <menuitem id="funding_source_type_menuitem"
+              parent="funding_source_config_menuitem"
+              action="partner_funding_source.funding_source_type_action" />
+    <menuitem id="funding_source_project_config_menuitem"
+              parent="funding_source_config_menuitem"
+              action="funding_source_project_action" />
+
+    <menuitem id="funding_source_project_menuitem"
+              parent="project.menu_project_report"
+              action="funding_source_project_action" />
+</odoo>
