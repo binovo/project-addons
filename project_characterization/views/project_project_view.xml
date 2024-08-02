@@ -5,8 +5,8 @@
         <field name="inherit_id" ref="project.project_project_view_form_simplified" />
         <field name="arch" type="xml">
             <field name="user_id" position="after">
-                <field name="res_area_id" required="1"/>
-                <field name="res_area_type_id" required="1"
+                <field name="res_area_id"/>
+                <field name="res_area_type_id"
                        options="{'no_create': True}"/>
                 <field name="num_code" />
             </field>
@@ -80,14 +80,13 @@
                 <field name="res_target_id" />
                 <field name="res_area_id" />
                 <field name="op_space_id" />
-                <field name="date_start" />
-                <field name="date" string="End Date"/>
                 <field name="justification_deadline" />
+                <field name="nonoperative" />
             </search>
             <field name="partner_id" position="after">
                 <separator />
-                <filter string="Operative" domain="[('nonoperative','=',False)]" />
-                <filter string="Non Operative" domain="[('nonoperative','=',True)]" />
+                <filter name="operative" string="Operative" domain="[('nonoperative','=',False)]" />
+                <filter name="nonoperative" string="Non Operative" domain="[('nonoperative','=',True)]" />
             </field>
             <filter name="Partner" position="after">
                 <filter string="Team" name="team_group" context="{'group_by':'res_team_id'}"/>
@@ -101,4 +100,3 @@
     </record>
 
 </odoo>
-
