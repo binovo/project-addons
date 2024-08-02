@@ -1,7 +1,7 @@
 # Copyright 2018 Oihane Crucelaegui - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class ProjectProject(models.Model):
@@ -11,7 +11,6 @@ class ProjectProject(models.Model):
         comodel_name='funding.source.project', inverse_name='project_id',
         string='Funding Sources', copy=True, context={'active_test': False})
 
-    @api.multi
     def write(self, vals):
         res = super(ProjectProject, self).write(vals) if vals else True
         if 'active' in vals:

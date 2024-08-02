@@ -34,7 +34,6 @@ class FundingSourceProject(models.Model):
         string='Approved Budget', digits=dp.get_precision('Funding'),
         help='Budget amount approved', track_visibility='onchange')
 
-    @api.multi
     @api.constrains('percentage')
     def _check_discount(self):
         for line in self:
@@ -45,7 +44,6 @@ class FundingSourceProject(models.Model):
                 raise ValidationError(
                     _("Percentage should be less or equal to 100"))
 
-    @api.multi
     def name_get(self):
         """ name_get() -> [(id, name), ...]
 

@@ -6,10 +6,8 @@
         <field name="arch" type="xml">
             <notebook position="inside">
                 <page name="funding_sources" string="Funding">
-                    <group name="funding_sources" string="Funding">
-                        <field name="funding_ids" context="{'default_project_id':active_id, 'active_test': False}"
-                               nolabel="1" />
-                    </group>
+                    <field name="funding_ids" context="{'default_project_id':active_id, 'active_test': False}"
+                           nolabel="1"/>
                 </page>
              </notebook>
         </field>
