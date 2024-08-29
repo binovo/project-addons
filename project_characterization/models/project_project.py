@@ -14,16 +14,16 @@ class ProjectProject(models.Model):
     )
     code = fields.Char(related="analytic_account_id.code")
     justification_deadline = fields.Date(
-        related="analytic_account_id.justification_deadline"
+        related="analytic_account_id.justification_deadline", readonly=False
     )
-    nonoperative = fields.Boolean(related="analytic_account_id.nonoperative")
-    num_code = fields.Char(related="analytic_account_id.num_code")
-    op_space_id = fields.Many2one(related="analytic_account_id.op_space_id")
-    res_area_id = fields.Many2one(related="analytic_account_id.res_area_id")
-    res_area_type_id = fields.Many2one(related="analytic_account_id.res_area_type_id")
-    res_character_id = fields.Many2one(related="analytic_account_id.res_character_id")
-    res_target_id = fields.Many2one(related="analytic_account_id.res_target_id")
-    res_team_id = fields.Many2one(related="analytic_account_id.res_team_id")
+    nonoperative = fields.Boolean(related="analytic_account_id.nonoperative", readonly=False)
+    num_code = fields.Char(related="analytic_account_id.num_code", readonly=False)
+    op_space_id = fields.Many2one(related="analytic_account_id.op_space_id", readonly=False)
+    res_area_id = fields.Many2one(related="analytic_account_id.res_area_id", readonly=False)
+    res_area_type_id = fields.Many2one(related="analytic_account_id.res_area_type_id", readonly=False)
+    res_character_id = fields.Many2one(related="analytic_account_id.res_character_id", readonly=False)
+    res_target_id = fields.Many2one(related="analytic_account_id.res_target_id", readonly=False)
+    res_team_id = fields.Many2one(related="analytic_account_id.res_team_id", readonly=False)
 
     @api.onchange("res_area_id")
     def _onchange_area_id(self):
