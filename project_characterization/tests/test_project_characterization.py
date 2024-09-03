@@ -105,8 +105,9 @@ class TestProjectCharacterization(common.TransactionCase):
         }
         new_project = self.project_model.new(vals)
         new_project._onchange_area_type()
-        vals.update({"num_code": "{}a".format(new_project.num_code)})
-        self.project_model.create(vals)
+        num_code_numeric_part = int(new_project.num_code) + 1
+        vals.update({"num_code": "{}a".format(num_code_numeric_part)})
+        new_project = self.project_model.create(vals)
         count = self.project_model.search_count(
             [
                 ("res_area_id", "=", self.area.id),
@@ -117,7 +118,7 @@ class TestProjectCharacterization(common.TransactionCase):
         new_project2._onchange_area_type()
         vals.update({"num_code": new_project2.num_code})
         new_project2 = self.project_model.create(vals)
-        self.assertEqual(new_project2.num_code, str(count + 1))
+        self.assertEqual(new_project2.num_code, "{}a".format(count + 1))
 
     def test_create_new_account(self):
         self.setting.manual_code = False
