@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="project_initial_budget_view_form" model="ir.ui.view">
+        <field name="name">project.initial.budget.form</field>
+        <field name="model">project.initial.budget</field>
+        <field name="arch" type="xml">
+            <form>
+                <group name="main">
+                    <field name="project_ids" invisible="1"/>
+                    <field name="date" required="1"/>
+                </group>
+                <footer>
+                    <button name="create_initial_project_budget" type="object"
+                            string="Create Initial Budget" class="oe_highlight" />
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="project_initial_budget_wizard_action" model="ir.actions.act_window">
+        <field name="name">Create Initial Budget</field>
+        <field name="res_model">project.initial.budget</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>
