@@ -8,7 +8,7 @@ from_string = fields.Date.from_string
 to_string = fields.Date.to_string
 
 
-class TestProjectBudget(common.SavepointCase):
+class TestProjectBudget(common.TransactionCase):
 
     @classmethod
     def setUpClass(cls):
@@ -21,25 +21,28 @@ class TestProjectBudget(common.SavepointCase):
             'account_budget_template.budget_template_id',
             cls.env.ref('project_budget.project_budget_template').id)
         set_param('project_budget.summary_line', True)
-        cls.project = cls.project_model.create({
+        project_values = {
             'name': 'New Project',
-        })
+        }
+        analytic_account = cls.project_model._create_analytic_account_from_values(project_values)
+        project_values['analytic_account_id'] = analytic_account.id
+        cls.project = cls.project_model.create(project_values)
 
     def test_project_creation(self):
         self.assertTrue(self.project.budget_ids)
         self.assertTrue(self.project.budget_ids[:1].initial)
-        self.assertEquals(
+        self.assertEqual(
             len(self.project.budget_ids), self.project.budget_count)
         self.assertTrue(self.project.has_current_budget)
         self.assertIn(
             self.project,
             self.project.search([('has_current_budget', '=', True)]))
-        self.assertEquals(len(
+        self.assertEqual(len(
             self.project.mapped('budget_ids.crossovered_budget_line')), 26)
         self.project.create_initial_project_budget()
-        self.assertEquals(len(self.project.budget_ids), 1)
+        self.assertEqual(len(self.project.budget_ids), 1)
         action_dict = self.project.budget_ids[:1].open_pivot_view()
-        self.assertEquals(action_dict.get('view_mode'), 'pivot')
+        self.assertEqual(action_dict.get('view_mode'), 'pivot')
 
     def test_initial_budget_per_project_year(self):
         new_budget = self.project.budget_ids.copy()
@@ -47,6 +50,9 @@ class TestProjectBudget(common.SavepointCase):
             new_budget.initial = True
 
     def test_budget_line_creation(self):
+        # asegurar que se recrean las líneas desde 0
+        self.project.analytic_account_id.crossovered_budget_line = False
+        self.project.budget_ids.crossovered_budget_line = False
         self.assertEqual(
             self.project.analytic_account_id.crossovered_budget_line,
             self.project.budget_ids.crossovered_budget_line)
@@ -56,7 +62,7 @@ class TestProjectBudget(common.SavepointCase):
         new_budget.date_to = from_string(fields.Date.today()).replace(
             month=12, day=29)
         new_budget.button_compute_lines()
-        self.assertEquals(len(
+        self.assertEqual(len(
             new_budget.crossovered_budget_line), 24)
         self.assertEqual(
             self.project.analytic_account_id.crossovered_budget_line,
@@ -69,47 +75,47 @@ class TestProjectBudget(common.SavepointCase):
         old_budget.crossovered_budget_line[:1].write({
             'planned_amount': 50.0,
         })
-        self.assertEquals(
+        self.assertEqual(
             old_budget.crossovered_budget_line[:1].sum_amount,
             old_budget.crossovered_budget_line[:1].planned_amount +
             old_budget.crossovered_budget_line[:1].practical_amount)
         new_budget = old_budget.copy()
-        self.assertEquals(
+        self.assertEqual(
             len(old_budget.crossovered_budget_line),
             len(new_budget.crossovered_budget_line))
         new_budget.crossovered_budget_line[:1].write({
             'planned_amount': 150.0,
         })
-        self.assertNotEquals(
+        self.assertNotEqual(
             new_budget.crossovered_budget_line[:1],
             new_budget.crossovered_budget_line[:1].initial_budget_line_id)
-        self.assertEquals(
+        self.assertEqual(
             old_budget.crossovered_budget_line[:1],
             new_budget.crossovered_budget_line[:1].initial_budget_line_id)
-        self.assertEquals(
+        self.assertEqual(
             old_budget.crossovered_budget_line[:1].planned_amount,
             new_budget.crossovered_budget_line[:1].initial_planned_amount)
-        self.assertNotEquals(
+        self.assertNotEqual(
             new_budget.crossovered_budget_line[:1].planned_amount,
             new_budget.crossovered_budget_line[:1].initial_planned_amount)
-        self.assertEquals(
+        self.assertEqual(
             new_budget.crossovered_budget_line[:1].sum_amount,
             new_budget.crossovered_budget_line[:1].planned_amount +
             new_budget.crossovered_budget_line[:1].practical_amount)
-        self.assertNotEquals(
+        self.assertNotEqual(
             old_budget.crossovered_budget_line[:1].sum_amount,
             new_budget.crossovered_budget_line[:1].sum_amount)
 
     def test_initial_budget_wizard(self):
         today = from_string(fields.Date.today())
-        self.assertEquals(len(self.project.budget_ids), 1)
+        self.assertEqual(len(self.project.budget_ids), 1)
         wizard = self.wizard.with_context(
             active_ids=[self.project.id]).create({
                 'date': today.replace(year=today.year + 1),
             })
         self.assertIn(self.project, wizard.project_ids)
         wizard.create_initial_project_budget()
-        self.assertEquals(len(self.project.budget_ids), 2)
+        self.assertEqual(len(self.project.budget_ids), 2)
 
     def test_search_project_budget(self):
         wizard = self.search_model.create({

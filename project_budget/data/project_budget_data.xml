@@ -3,14 +3,14 @@
     <record id="account_account_income" model="account.account">
         <field name="code">000</field>
         <field name="name">Income</field>
-        <field name="user_type_id" ref="account.data_account_type_revenue" />
+        <field name="account_type">expense</field>
         <field name="deprecated">True</field>
     </record>
 
     <record id="account_account_expenses" model="account.account">
         <field name="code">001</field>
         <field name="name">Expenses</field>
-        <field name="user_type_id" ref="account.data_account_type_expenses" />
+        <field name="account_type">expense</field>
         <field name="deprecated">True</field>
     </record>
 
