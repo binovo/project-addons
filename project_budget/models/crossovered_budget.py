@@ -71,8 +71,7 @@ class CrossoveredBudget(models.Model):
                 }
                 ds = from_string(budget.date_from)
                 final_date = ds.replace(day=30, month=12)
-                budget_date_to = fields.Date.from_string(budget.date_to)
-                if final_date < budget_date_to:
+                if final_date < budget.date_to:
                     for budget_post in budget_posts:
                         vals.update(
                             {

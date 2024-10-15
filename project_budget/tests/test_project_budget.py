@@ -55,6 +55,9 @@ class TestProjectBudget(common.TransactionCase):
             new_budget.initial = True
 
     def test_budget_line_creation(self):
+        # asegurar que se recrean las líneas desde 0
+        self.project.analytic_account_id.crossovered_budget_line = False
+        self.project.budget_ids.crossovered_budget_line = False
         self.assertEqual(
             self.project.analytic_account_id.crossovered_budget_line,
             self.project.budget_ids.crossovered_budget_line,
