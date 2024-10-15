@@ -124,9 +124,9 @@ class CrossoveredBudgetLines(models.Model):
 
     def button_recompute_amount(self):
         fields_list = ['practical_amount', 'sum_amount']
-        for record in self:
-            for field in fields_list:
-                record._recompute_field(field)
+        for field in fields_list:
+            self.env.add_to_compute(self._fields[field], self)
+        self.flush_model()
 
     @api.depends('initial_budget_line_id', 'planned_amount',
                  'initial_budget_line_id.planned_amount')
