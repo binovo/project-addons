@@ -1,11 +1,26 @@
-# Translation of Odoo Server.
-# This file contains the translation of the following modules:
-# 	* project_budget
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"PO-Revision-Date: 2024-10-30 13:51+0100\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#~ # Translation of Odoo Server.
+#~ # This file contains the translation of the following modules:
+#~ # 	* project_budget
+#~ #
+#~ msgid ""
+#~ msgstr ""
+#~ "Project-Id-Version: Odoo Server 16.0\n"
+#~ "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-25 09:46+0000\n"
 "PO-Revision-Date: 2024-10-25 09:46+0000\n"
 "Last-Translator: \n"
@@ -33,13 +48,15 @@ msgstr "<span>Informe pivotante de líneas presupuestarias</span>"
 #. module: project_budget
 #: model_terms:ir.actions.act_window,help:project_budget.project_budget_action
 msgid ""
-"A budget is a forecast of your company's income and/or expenses expected for a period in the future. A\n"
-"                budget is defined on some financial accounts and/or analytic accounts (that may represent projects,\n"
-"                departments, categories of products, etc.)"
+"A budget is a forecast of your company's income and/or expenses expected for"
+" a period in the future. A budget is defined on some financial accounts "
+"and/or analytic accounts (that may represent projects, departments, "
+"categories of products, etc.)"
 msgstr ""
-"n presupuesto es una previsión de los ingresos y/o gastos de su empresa previstos para un periodo en el futuro. Un\n"
-"		 presupuesto se define en algunas cuentas financieras y/o cuentas analíticas (que pueden representar proyectos,\n"
-"               departamentos, categorías de productos, etc.)"
+"Un presupuesto es una proyección de los ingresos y/o gastos esperados\n"
+"en su compañía en un período en el futuro. Se define en varias cuentas\n"
+"financieras y/o analíticas (que pueden representar proyectos,\n"
+"departamentos, categorías de productos, etc)"
 
 #. module: project_budget
 #: model:ir.model.fields,field_description:project_budget.field_crossovered_budget__active
@@ -113,13 +130,16 @@ msgstr "Presupuestos"
 #. module: project_budget
 #: model_terms:ir.actions.act_window,help:project_budget.project_budget_action
 msgid ""
-"By keeping track of where your money goes, you may be less likely to overspend, and more likely to meet\n"
-"                your financial goals. Forecast a budget by detailing the expected revenue per analytic account and\n"
-"                monitor its evolution based on the actuals realised during that period."
+"By keeping track of where your money goes, you may be less likely to "
+"overspend, and more likely to meet your financial goals. Forecast a budget "
+"by detailing the expected revenue per analytic account and monitor its "
+"evolution based on the actuals realised during that period."
 msgstr ""
-"Si controla en qué gasta su dinero, es menos probable que gaste más de la cuenta y más probable que cumpla los\n"
-"	         sus objetivos financieros. Prevea un presupuesto detallando los ingresos previstos por cuenta analítica y\n"
-"                seguir su evolución en función de los datos reales realizados durante ese periodo."
+"Llevando el registro de adonde va el dinero seguramente será menos\n"
+"probable que gastes de menos y más probable que cumplas con los\n"
+"objetivos financieros. Prepara un presupuesto detallando el retorno\n"
+"esperado por cuenta analítica y observa su evolución basándote en las\n"
+"valores reales del periodo."
 
 #. module: project_budget
 #: model_terms:ir.ui.view,arch_db:project_budget.project_budget_search_view_form
@@ -136,6 +156,11 @@ msgstr "Si marca esta casilla, sólo se buscarán aquellos con presupuesto inici
 #: model_terms:ir.actions.act_window,help:project_budget.project_budget_action
 msgid "Click to create a new budget."
 msgstr "Haga clic para crear un nuevo presupuesto."
+
+#. module: project_budget
+#: model:ir.model,name:project_budget.model_res_config_settings
+msgid "Config Settings"
+msgstr "Ajustes de configuración"
 
 #. module: project_budget
 #: model:ir.model,name:project_budget.model_res_config_settings
@@ -410,10 +435,4 @@ msgstr "Año"
 #: model_terms:ir.ui.view,arch_db:project_budget.project_budget_search_view_form
 #: model_terms:ir.ui.view,arch_db:project_budget.project_initial_budget_view_form
 msgid "or"
-msgstr "o"
-
-#. module: project_budget
-#: model:ir.model,name:project_budget.model_res_config_settings
-msgid "res.config.settings"
-msgstr "res.config.settings"
-
+msgstr ""
