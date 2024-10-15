@@ -74,8 +74,9 @@ class ProjectProject(models.Model):
             })
             budget.button_compute_lines()
 
-    @api.model
-    def create(self, values):
-        created = super(ProjectProject, self).create(values)
-        created.create_initial_project_budget()
+    @api.model_create_multi
+    def create(self, vals_list):
+        created = super().create(vals_list)
+        for p in created:
+            p.create_initial_project_budget()
         return created
