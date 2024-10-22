@@ -4,14 +4,14 @@
         <field name="code">000</field>
         <field name="name">Income</field>
         <field name="account_type">expense</field>
-        <field name="deprecated">True</field>
+        <field name="deprecated">False</field>
     </record>
 
     <record id="account_account_expenses" model="account.account">
         <field name="code">001</field>
         <field name="name">Expenses</field>
         <field name="account_type">expense</field>
-        <field name="deprecated">True</field>
+        <field name="deprecated">False</field>
     </record>
 
     <record id="budget_post_income" model="account.budget.post">
