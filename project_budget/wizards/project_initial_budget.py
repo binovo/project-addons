@@ -5,20 +5,18 @@ from odoo import api, fields, models
 
 
 class ProjectInitialBudget(models.TransientModel):
-    _name = 'project.initial.budget'
-    _description = 'Wizard to create initial budget'
+    _name = "project.initial.budget"
+    _description = "Wizard to create initial budget"
 
-    project_ids = fields.Many2many(
-        comodel_name='project.project', string='Project')
+    project_ids = fields.Many2many(comodel_name="project.project", string="Project")
     date = fields.Date(
-        string='Budget Date', default=lambda s: fields.Date.context_today(s))
+        string="Budget Date", default=lambda s: fields.Date.context_today(s)
+    )
 
     @api.model
     def default_get(self, fields):
         rec = super(ProjectInitialBudget, self).default_get(fields)
-        rec.update({
-            'project_ids': [(6, 0, self.env.context.get('active_ids'))],
-        })
+        rec.update({"project_ids": [(6, 0, self.env.context.get("active_ids"))]})
         return rec
 
     def create_initial_project_budget(self):

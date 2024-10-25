@@ -8,9 +8,10 @@
             'search_default_project_id': [active_id],
             'default_project_id': active_id,
             'active_test': False,
-        }</field>
+            }
+        </field>
         <field name="view_id"
-               ref="account_budget_oca.crossovered_budget_view_tree" />
+               ref="account_budget_oca.crossovered_budget_view_tree"/>
         <field name="search_view_id"
                ref="account_budget_oca.view_crossovered_budget_search"/>
         <field name="help" type="html">
@@ -18,10 +19,14 @@
                 Click to create a new budget.
             </p>
             <p>
-                A budget is a forecast of your company's income and/or expenses expected for a period in the future. A budget is defined on some financial accounts and/or analytic accounts (that may represent projects, departments, categories of products, etc.)
+                A budget is a forecast of your company's income and/or expenses expected for a period in the future. A
+                budget is defined on some financial accounts and/or analytic accounts (that may represent projects,
+                departments, categories of products, etc.)
             </p>
             <p>
-                By keeping track of where your money goes, you may be less likely to overspend, and more likely to meet your financial goals. Forecast a budget by detailing the expected revenue per analytic account and monitor its evolution based on the actuals realised during that period.
+                By keeping track of where your money goes, you may be less likely to overspend, and more likely to meet
+                your financial goals. Forecast a budget by detailing the expected revenue per analytic account and
+                monitor its evolution based on the actuals realised during that period.
             </p>
         </field>
     </record>
@@ -31,23 +36,23 @@
         <field name="model">project.project</field>
         <field name="inherit_id" ref="project.edit_project" />
         <field name="arch" type="xml">
-            <field name="collaborator_count" position="before">
+             <xpath expr="//button[@name='%(project.project_collaborator_action)d']" position="before">
                 <button class="oe_stat_button" type="action"
                         name="%(project_budget_action)d" icon="fa-tasks">
                     <field string="Budgets" name="budget_count"
                            widget="statinfo"/>
                 </button>
-            </field>
+            </xpath>
         </field>
     </record>
 
     <record id="project_project_form_view2" model="ir.ui.view">
         <field name="name">project.project.form.budget</field>
         <field name="model">project.project</field>
-        <field name="inherit_id" ref="project_project_form_view" />
+        <field name="inherit_id" ref="project_project_form_view"/>
         <field name="arch" type="xml">
             <field name="analytic_account_id" position="after">
-                <field name="current_budget_id" invisible="1" />
+                <field name="current_budget_id" invisible="1"/>
             </field>
             <button name="%(project_budget_action)d" position="after">
                 <button class="oe_stat_button" type="action"
@@ -62,14 +67,14 @@
 
     <record id="project_project_search_view" model="ir.ui.view">
         <field name="model">project.project</field>
-        <field name="inherit_id" ref="project.view_project_project_filter" />
+        <field name="inherit_id" ref="project.view_project_project_filter"/>
         <field name="arch" type="xml">
             <filter name="inactive" position="after">
-                <separator />
+                <separator/>
                 <filter name="unbudgeted" string="Unbudgeted"
-                        domain="[('has_current_budget', '!=', True)]" />
+                        domain="[('has_current_budget', '!=', True)]"/>
                 <filter name="budgeted" string="Budgeted"
-                        domain="[('has_current_budget', '=', True)]" />
+                        domain="[('has_current_budget', '=', True)]"/>
             </filter>
         </field>
     </record>

@@ -3,18 +3,22 @@
 
 
 def update_budget_date(cr):
-    cr.execute("""
+    cr.execute(
+        """
         ALTER TABLE
           crossovered_budget
         ADD COLUMN
           budget_date date;
-    """)
-    cr.execute("""
+    """
+    )
+    cr.execute(
+        """
         UPDATE
           crossovered_budget
         SET
           budget_date = create_date;
-    """)
+    """
+    )
 
 
 def migrate(cr, version):

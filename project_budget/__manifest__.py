@@ -12,15 +12,11 @@
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
         "Ana Juaristi <anajuaristi@avanzosc.es>",
     ],
-    "depends": [
-        "account_budget_oca",
-        "account_budget_template",
-        "project",
-    ],
+    "depends": ["account_budget_oca", "account_budget_template", "project"],
     "data": [
         "security/ir.model.access.csv",
         "security/project_budget_groups.xml",
-        #"data/project_budget_data.xml",
+        "data/project_budget_data.xml",
         "views/crossovered_budget_view.xml",
         "views/crossovered_budget_line_view.xml",
         "views/project_project_view.xml",

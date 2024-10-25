@@ -4,23 +4,21 @@ from odoo import api, fields, models
 
 
 class AccountAnalyticAccount(models.Model):
-    _inherit = 'account.analytic.account'
+    _inherit = "account.analytic.account"
 
     def _domain_budget_line(self):
         if not self:
             return []
-        all_lines = self.env['crossovered.budget.lines'].search(
-            [('analytic_account_id', '=', self.id)])
-        last_budget = all_lines.mapped('crossovered_budget_id')[-1:]
-        domain = (
-            [('crossovered_budget_id', '=', last_budget.id)] if last_budget
-            else [])
+        all_lines = self.env["crossovered.budget.lines"].search(
+            [("analytic_account_id", "=", self.id)]
+        )
+        last_budget = all_lines.mapped("crossovered_budget_id")[-1:]
+        domain = [("crossovered_budget_id", "=", last_budget.id)] if last_budget else []
         return domain
 
     crossovered_budget_line = fields.One2many(
-        comodel_name='crossovered.budget.lines',
-        inverse_name='analytic_account_id',
-        string='Budget Lines',
-        domain=lambda self: self._domain_budget_line()
+        comodel_name="crossovered.budget.lines",
+        inverse_name="analytic_account_id",
+        string="Budget Lines",
+        domain=lambda self: self._domain_budget_line(),
     )
-
