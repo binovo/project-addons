@@ -32,8 +32,24 @@ class ProjectProject(models.Model):
 
     @api.onchange("res_area_id", "res_area_type_id")
     def _onchange_area_type(self):
-        if self.analytic_account_id:
-            self.analytic_account_id._onchange_area_type()
+        self.ensure_one()
+        get_param = self.env['ir.config_parameter'].sudo().get_param
+        manual_code = get_param('project_characterization.manual_code', 'False').lower() == 'true'
+        if not manual_code:
+            if self.res_area_id and self.res_area_type_id:
+                try:
+                    projects = self.search([
+                        ('res_area_id', '=', self.res_area_id.id),
+                        ('res_area_type_id', '=', self.res_area_type_id.id)
+                    ])
+                    count = int(sorted(
+                        projects.mapped('num_code'), key=int, reverse=True)[0])
+                except Exception:
+                    count = self.search_count([
+                        ('res_area_id', '=', self.res_area_id.id),
+                        ('res_area_type_id', '=', self.res_area_type_id.id)
+                    ])
+                self.num_code = count + 1
 
 
 class ResArea(models.Model):

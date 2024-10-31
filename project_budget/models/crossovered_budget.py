@@ -114,9 +114,8 @@ class CrossoveredBudget(models.Model):
     def open_pivot_view(self):
         self.ensure_one()
         self.button_recompute_line_amount()
-        action = self.env.ref("account_budget_oca.act_crossovered_budget_lines_view")
-        action_dict = action.read()[0]
-        action_dict.update(
+        action = self.env["ir.actions.actions"]._for_xml_id("account_budget_oca.act_crossovered_budget_lines_view")
+        action.update(
             {
                 "view_mode": "pivot",
                 "view_id": False,
@@ -124,8 +123,7 @@ class CrossoveredBudget(models.Model):
                 "domain": [("crossovered_budget_id", "=", self.id)],
             }
         )
-        return action_dict
-
+        return action
 
 class CrossoveredBudgetLines(models.Model):
     _inherit = "crossovered.budget.lines"
