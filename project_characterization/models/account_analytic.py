@@ -53,31 +53,32 @@ class AccountAnalyticAccount(models.Model):
                     )
                 self.num_code = count + 1
 
-    @api.model
-    def create(self, values):
-        if not values.get("code"):
-            area_id = values.get("res_area_id")
-            type_id = values.get("res_area_type_id")
-            num_code = values.get("num_code", False)
-            if num_code == False:
-                num_code = self.search_count(
-                    [
-                        ("res_area_id", "=", area_id or -1),
-                        ("res_area_type_id", "=", type_id or -1),
-                    ]
-                )
-                values["num_code"] = str(num_code)
-            if area_id and type_id:
-                values.update(
-                    {
-                        "code": "{}.{}.{}".format(
-                            self.env["res.area"].browse(area_id).code or "",
-                            self.env["res.area.type"].browse(type_id).code or "",
-                            num_code,
-                        )
-                    }
-                )
-        return super(AccountAnalyticAccount, self).create(values)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for values in vals_list:
+            if not values.get("code"):
+                area_id = values.get("res_area_id")
+                type_id = values.get("res_area_type_id")
+                num_code = values.get("num_code", False)
+                if num_code == False:
+                    num_code = self.search_count(
+                        [
+                            ("res_area_id", "=", area_id or -1),
+                            ("res_area_type_id", "=", type_id or -1),
+                        ]
+                    )
+                    values["num_code"] = str(num_code)
+                if area_id and type_id:
+                    values.update(
+                        {
+                            "code": "{}.{}.{}".format(
+                                self.env["res.area"].browse(area_id).code or "",
+                                self.env["res.area.type"].browse(type_id).code or "",
+                                num_code,
+                            )
+                        }
+                    )
+        return super(AccountAnalyticAccount, self).create(vals_list)
 
 
 class AccountAnalyticLine(models.Model):

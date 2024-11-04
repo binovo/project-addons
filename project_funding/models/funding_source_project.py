@@ -20,19 +20,19 @@ class FundingSourceProject(models.Model):
     account_id = fields.Many2one(
         comodel_name='account.account', string='Funding Source Account')
     percentage = fields.Float(
-        string='Percentage (%)', digits=dp.get_precision('Discount'),
+        string='Percentage (%)', digits='Discount',
         group_operator='sum')
     funding_date = fields.Date(string='Funding Date')
     year = fields.Integer(string='Year')
     yearly_amount = fields.Float(
-        string='Yearly Amount', digits=dp.get_precision('Funding'))
+        string='Yearly Amount', digits='Funding')
     active = fields.Boolean(string='Active', default=True)
     budget_submitted = fields.Float(
-        string='Proposed Budget', digits=dp.get_precision('Funding'),
-        help='Budget amount proposed', track_visibility='onchange')
+        string='Proposed Budget', digits='Funding',
+        help='Budget amount proposed', tracking=True)
     budget_approved = fields.Float(
-        string='Approved Budget', digits=dp.get_precision('Funding'),
-        help='Budget amount approved', track_visibility='onchange')
+        string='Approved Budget', digits='Funding',
+        help='Budget amount approved', tracking=True)
 
     @api.constrains('percentage')
     def _check_discount(self):
