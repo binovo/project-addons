@@ -62,6 +62,9 @@
                 <separator string="Notes" colspan="4"/>
                 <field name="notes" nolabel="True" colspan="4"/>
             </xpath>
+            <xpath expr="//field[@name='crossovered_budget_line_ids']/tree" position="attributes">
+                <attribute name="delete">1</attribute>
+            </xpath>
         </field>
     </record>
 
