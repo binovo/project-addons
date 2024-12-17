@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="project_project_members_form_view" model="ir.ui.view">
+        <field name="name">project.project.members.form</field>
+        <field name="model">project.project</field>
+        <field name="priority">25</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page name="project_team" string="Project Team">
+                    <label for="member_ids" />
+                    <field name="member_ids" nolabel="1"
+                           context="{'default_project_id':active_id, 'active_test': False}" />
+                </page>
+             </notebook>
+        </field>
+    </record>
+
+    <record id="project_project_members_planned_form_view" model="ir.ui.view">
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project_project_members_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_title')]" position="after">
+                <group groups="project_team.group_planned_hours_project">
+                    <group string="Planned Hours">
+                        <field name="planned_hours" string="By Project" widget="float_time" />
+                        <field name="task_planned_hours" string="By Tasks" widget="float_time" />
+                    </group>
+                    <group string="Periods">
+                        <label for="planned_date_start" string="By Project"/>
+                        <div name="planned_dates" class="o_row">
+                            <field name="planned_date_start" widget="daterange" options='{"related_end_date": "planned_date_end"}'/>
+                            <i class="fa fa-long-arrow-right mx-2 oe_edit_only" aria-label="Arrow icon" title="Arrow"/>
+                            <i class="fa fa-long-arrow-right mx-2 oe_read_only" aria-label="Arrow icon" title="Arrow" attrs="{'invisible': [('planned_date_start', '=', False), ('planned_date_end', '=', False)]}"/>
+                            <field name="planned_date_end" widget="daterange" options='{"related_start_date": "planned_date_start"}'/>
+                        </div>
+                        <field name="planned_date_margin" invisible="True"/>
+                        <label for="task_date_start" string="By Tasks"/>
+                        <div name="task_dates" class="o_row">
+                            <field name="task_date_start" widget="daterange" options='{"related_end_date": "task_date_end"}'/>
+                            <i class="fa fa-long-arrow-right mx-2 oe_edit_only" aria-label="Arrow icon" title="Arrow"/>
+                            <i class="fa fa-long-arrow-right mx-2 oe_read_only" aria-label="Arrow icon" title="Arrow" attrs="{'invisible': [('task_date_start', '=', False), ('task_date_end', '=', False)]}"/>
+                            <field name="task_date_end" widget="daterange" options='{"related_start_date": "task_date_start"}'/>
+                        </div>
+                        <field name="task_date_margin" invisible="True"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

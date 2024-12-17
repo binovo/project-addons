@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="edit_project_inh_partner_rol" model="ir.ui.view">
+        <field name="name">project.project.partner_rol.form</field>
+        <field name="model">project.project</field>
+        <field name="priority">25</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+           <field name="partner_id" position="after">
+                <field name="project_location_id" />
+           </field>
+           <page name="settings" position="before">
+              <page name="participants" string="Participants">
+                  <label for="participant_ids" />
+                  <field name="participant_ids" nolabel="1"
+                         context="{'default_project_id':active_id}"/>
+              </page>
+           </page>
+        </field>
+    </record>
+
+    <record id="view_project_project_filter_inh_partner_rol" model="ir.ui.view">
+        <field name="name">project.project.partner_rol.search</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.view_project_project_filter"/>
+        <field name="arch" type="xml">
+           <field name="name" position="after">
+                <field name="project_location_id" />
+           </field>
+           <filter name="Partner" position="after">
+                <filter string="Location" name="project_location" context="{'group_by':'project_location_id'}"/>
+           </filter>
+        </field>
+    </record>
+
+    <record id="view_project_tree_inh_partner_rol" model="ir.ui.view">
+        <field name="name">project.project.partner_rol.tree</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.view_project"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="project_location_id" />
+            </field>
+        </field>
+    </record>
+
+    <menuitem id="project_participant_config_menuitem"
+              name="Project Participants"
+              parent="project.menu_project_config"
+              sequence="11"/>
+
+</odoo>

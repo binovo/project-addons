@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="project_participant_rol_tree_view" model="ir.ui.view">
+        <field name="name">project.participant.rol.tree</field>
+        <field name="model">project.participant.rol</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="name" string="Participant Role"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="project_participant_rol_search_view" model="ir.ui.view">
+        <field name="name">project.participant.rol.search</field>
+        <field name="model">project.participant.rol</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+            </search>
+        </field>
+    </record>
+
+    <record id="project_participant_rol_form_view" model="ir.ui.view">
+        <field name="name">project.participant.rol.form</field>
+        <field name="model">project.participant.rol</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <label for="name" string="Participant Role" class="oe_editonly"/>
+                    <h1>
+                        <field name="name" class="oe_inline" />
+                    </h1>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_project_participant_rol_view" model="ir.actions.act_window">
+        <field name="name">Participant Roles</field>
+        <field name="res_model">project.participant.rol</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="project_participant_rol_option_view"
+              action="action_project_participant_rol_view"
+              parent="project_participant_config_menuitem"
+              sequence="2"/>
+
+</odoo>

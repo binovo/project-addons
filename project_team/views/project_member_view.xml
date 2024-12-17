@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="project_member_tree_view" model="ir.ui.view">
+        <field name="model">project.member</field>
+        <field name="arch" type="xml">
+            <tree string="Project Members" editable="top"
+                  decoration-muted="not active">
+                <field name="project_id" invisible="context.get('hide_project_id',True)" />
+                <field name="user_id" />
+                <field name="partner_id" />
+                <field name="active" invisible="True" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="project_member_planned_hour_tree_view" model="ir.ui.view">
+        <field name="model">project.member</field>
+        <field name="inherit_id" ref="project_team.project_member_tree_view" />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="planned_hours_percentage" groups="project_team.group_planned_hours_project"/>
+                <field name="project_planned_hours" widget="float_time" sum="Project Hours" groups="project_team.group_planned_hours_project"/>
+                <field name="task_planned_hours" widget="float_time" sum="Task Hours" groups="project_team.group_planned_hours_project"/>
+                <field name="monthly_planned_hours" widget="float_time" groups="project_team.group_planned_hours_project"/>
+                <field name="monthly_task_planned_hours" widget="float_time" groups="project_team.group_planned_hours_project"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="project_member_form_view" model="ir.ui.view">
+        <field name="model">project.member</field>
+        <field name="arch" type="xml">
+            <form string="Project Member">
+                <sheet>
+                    <group name="main">
+                        <field name="project_id" invisible="context.get('hide_project_id',True)" />
+                        <field name="user_id" />
+                        <field name="partner_id" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="project_member_planned_hour_form_view" model="ir.ui.view">
+        <field name="model">project.member</field>
+        <field name="inherit_id" ref="project_team.project_member_form_view"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="planned_hours_percentage" groups="project_team.group_planned_hours_project"/>
+                <field name="project_planned_hours" widget="float_time" groups="project_team.group_planned_hours_project"/>
+                <field name="task_planned_hours" widget="float_time" groups="project_team.group_planned_hours_project"/>
+                <field name="monthly_planned_hours" widget="float_time" groups="project_team.group_planned_hours_project"/>
+                <field name="monthly_task_planned_hours" widget="float_time" groups="project_team.group_planned_hours_project"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="project_member_search_view" model="ir.ui.view">
+        <field name="model">project.member</field>
+        <field name="arch" type="xml">
+            <search string="Search Members">
+                <field name="project_id" />
+                <field name="user_id" />
+                <filter name="inactive_filter" string="Archived"
+                        domain="[('active','=',False)]" />
+                <group expand="1" string="Group By">
+                    <filter string="Project" name="group_project_id"
+                            domain="[]" context="{'group_by':'project_id'}"/>
+                    <filter string="User" name="group_user_id"
+                            domain="[]" context="{'group_by':'user_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_project_member_view" model="ir.actions.act_window">
+        <field name="name">Project Members</field>
+        <field name="res_model">project.member</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{
+            'hide_project_id': False,
+        }</field>
+    </record>
+
+    <menuitem id="project_team_config_menuitem"
+          name="Project Team"
+          parent="project.menu_project_config" sequence="11"/>
+
+    <menuitem id="project_member_menuitem"
+              action="action_project_member_view"
+              parent="project_team_config_menuitem" sequence="11"/>
+</odoo>
