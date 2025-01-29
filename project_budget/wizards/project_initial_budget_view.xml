@@ -22,7 +22,9 @@
     <record id="project_initial_budget_wizard_action" model="ir.actions.act_window">
         <field name="name">Create Initial Budget</field>
         <field name="res_model">project.initial.budget</field>
+        <field name="binding_model_id" ref="model_project_project"/>
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
+
 </odoo>
