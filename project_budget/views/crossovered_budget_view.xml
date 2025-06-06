@@ -58,9 +58,10 @@
             <xpath expr="//field[@name='percentage']" position="after">
                 <field name="notes"/>
             </xpath>
-            <xpath expr="//field[@name='company_id']/.." position="after">
-                <separator string="Notes" colspan="4"/>
-                <field name="notes" nolabel="True" colspan="4"/>
+            <xpath expr="//field[@name='crossovered_budget_line_ids']/form/group" position="inside">
+              <group string="Notes">
+                <field name="notes" nolabel="1" colspan="4"/>
+              </group>
             </xpath>
             <xpath expr="//field[@name='crossovered_budget_line_ids']/tree" position="attributes">
                 <attribute name="delete">1</attribute>
