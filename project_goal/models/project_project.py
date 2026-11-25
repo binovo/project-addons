@@ -17,7 +17,7 @@ class ProjectProject(models.Model):
 
     @api.model
     def default_get(self, fields):
-        res = super(ProjectProject, self).default_get(fields)
+        res = super().default_get(fields)
         default_goals = self.env["project.goal.goal"].search(
             [
                 ("default_goal", "=", True),
@@ -43,11 +43,10 @@ class ProjectProject(models.Model):
         )
         return res
 
-    @api.multi
     def write(self, vals):
-        res = super(ProjectProject, self).write(vals) if vals else True
+        """Archive or unarchive the project's goals together with the project."""
+        res = super().write(vals) if vals else True
         if "active" in vals:
-            # archiving/unarchiving a project does it on its goals, too
             self.with_context(active_test=False).mapped("goal_ids").write(
                 {"active": vals["active"]}
             )

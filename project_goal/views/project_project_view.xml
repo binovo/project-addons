@@ -8,10 +8,8 @@
         <field name="arch" type="xml">
             <notebook position="inside">
                 <page name="goals" string="Goals">
-                    <group name="goals" string="Goals">
-                        <field name="goal_ids" nolabel="1"
-                               context="{'default_project_id':active_id}"/>
-                    </group>
+                    <field name="goal_ids" nolabel="1"
+                           context="{'default_project_id':active_id}"/>
                 </page>
             </notebook>
         </field>

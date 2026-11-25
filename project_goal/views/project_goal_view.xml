@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="project_goal_view_form" model="ir.ui.view">
+        <field name="name">project.goal.form</field>
         <field name="model">project.goal</field>
         <field name="arch" type="xml">
             <form>
@@ -20,6 +21,7 @@
     </record>
 
     <record id="project_goal_view_tree" model="ir.ui.view">
+        <field name="name">project.goal.tree</field>
         <field name="model">project.goal</field>
         <field name="arch" type="xml">
             <tree editable="top"
@@ -38,6 +40,7 @@
     </record>
 
     <record id="project_goal_type_view_tree" model="ir.ui.view">
+        <field name="name">project.goal.type.tree</field>
         <field name="model">project.goal.type</field>
         <field name="arch" type="xml">
             <tree editable="top">
@@ -47,6 +50,7 @@
     </record>
 
     <record id="project_goal_goal_view_tree" model="ir.ui.view">
+        <field name="name">project.goal.goal.tree</field>
         <field name="model">project.goal.goal</field>
         <field name="arch" type="xml">
             <tree>
@@ -58,6 +62,7 @@
     </record>
 
     <record id="project_goal_goal_view_form" model="ir.ui.view">
+        <field name="name">project.goal.goal.form</field>
         <field name="model">project.goal.goal</field>
         <field name="arch" type="xml">
             <form>
@@ -71,13 +76,15 @@
                             <field name="default_goal"/>
                         </group>
                     </group>
-                    <field name="description"/>
+                    <separator string="Description"/>
+                    <field name="description" nolabel="1"/>
                 </sheet>
             </form>
         </field>
     </record>
 
     <record id="project_goal_view_search" model="ir.ui.view">
+        <field name="name">project.goal.search</field>
         <field name="model">project.goal</field>
         <field name="arch" type="xml">
             <search>

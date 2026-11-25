@@ -1,14 +1,14 @@
 # Copyright 2018 Oihane Crucelaegui - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from odoo.tests import common, tagged
+from odoo.tests import TransactionCase, tagged
 
 
 @tagged("post_install", "-at_install")
-class TestProjectGoal(common.SavepointCase):
+class TestProjectGoal(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestProjectGoal, cls).setUpClass()
+        super().setUpClass()
         goal_type = cls.env.ref("project_goal.gtype1")
         cls.goal_type2 = cls.env.ref("project_goal.gtype2")
         cls.goal = cls.env["project.goal.goal"].create(
@@ -44,14 +44,14 @@ class TestProjectGoal(common.SavepointCase):
     def test_project_goal_onchanges(self):
         for goal in self.project.with_context(active_test=False).goal_ids:
             self.assertFalse(goal.goal_id)
-            self.assertNotEquals(goal.name, self.goal.description)
+            self.assertNotEqual(goal.name, self.goal.description)
             goal.write(
                 {
                     "goal_id": self.goal.id,
                 }
             )
             goal.onchange_goal_id()
-            self.assertEquals(goal.name, self.goal.description)
+            self.assertEqual(goal.name, self.goal.description)
             goal.write(
                 {
                     "type_id": self.goal_type2.id,
