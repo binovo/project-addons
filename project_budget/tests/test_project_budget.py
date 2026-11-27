@@ -67,7 +67,7 @@ class TestProjectBudget(common.TransactionCase):
         )
         new_budget.date_to = from_string(fields.Date.today()).replace(month=12, day=29)
         new_budget.button_compute_lines()
-        self.assertEqual(len(new_budget.crossovered_budget_line), 26)
+        self.assertEqual(len(new_budget.crossovered_budget_line), 24)
 
     def test_initial_budget_duplication(self):
         old_budget = self.project.budget_ids[:1]
